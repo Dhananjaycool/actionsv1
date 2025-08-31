@@ -12,7 +12,11 @@ jobs:
                 echo "My first Job"
                 ls -ltra
                 cat README.md
-                
+            # Execute a Thrid party library
+            - name: Generate ASCII Artwork 
+              run: cowsay -f dragon "Run for cover, I am a Dragon.......RAWR" >> dragon.txt
+              
+
             # - name: List files
             #   run: ls 
             

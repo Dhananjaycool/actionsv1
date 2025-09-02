@@ -1,0 +1,22 @@
+name: practise workflow
+on:
+    push
+jobs:
+    build_job:
+        runs-on: ubuntu-latest
+        steps:
+          - name: build job
+            run: echo "running build job"
+              
+    test_job:
+        runs-on: ubuntu-latest
+        steps:
+          - name: test job
+            run: echo "running test job"
+              
+    deploy_job:
+        runs-on: ubuntu-latest
+        steps:
+          - name: deploy job
+            run: echo "running deploy job"
+              

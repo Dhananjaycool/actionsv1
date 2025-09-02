@@ -1,0 +1,42 @@
+name: Multi-Job Workflow Example
+on:
+  push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build stage
+        run: |
+          echo "This is a file created in the build job" > build_output.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: build_output.txt
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+      - name: Test stage
+        run: |
+          echo "Testing with the following file content:"
+          cat build_output.txt
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+      - name: Deploy stage
+        run: |
+          echo "Deploying with the following file content:"
+          cat build_output.txt
